@@ -9,6 +9,7 @@ const Login = () => {
     const username = useRef();
     const password = useRef();
     const {dispatch} = useContext(AuthContext);
+    
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -18,8 +19,8 @@ const Login = () => {
             });
             const {message, status, ...other} = res.data;
             dispatch({type:"LOGIN_SUCCESS", payload: other});
-        } catch(e) {
-            dispatch({type: "LOGIN_FAILURE", payload: e});
+        } catch(error) {
+            dispatch({type: "LOGIN_FAILURE", payload: error});
         }
     }
 

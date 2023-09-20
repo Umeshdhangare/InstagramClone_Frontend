@@ -28,33 +28,31 @@ function Rightbar(){
             <div className='rightbarWrapper'>
                 <span className='rightbarFollowingTitle'>Followings</span>
                 <div className='rightbarFollowings'>
-                    {Followings.map((following) => {
-                      
-                      <div key={following._id} className='rightbarFollowing'>
-                        {following}
+                    {Followings.map((f) => {
+                      return <div key={f._id} className='rightbarFollowing'>
                         <div className='rightbarFollowingLeft'>
                           <Link style={{textDecoration:"none", color:"#000000"}}
-                            to={`/profile/${username}`}
+                            to={`/profile/${f.username}`}
                           >
                             <img
-                              src={following.profilePicture}
+                              src={f.profilePicture}
                               alt=''
                               className='rightbarFollowingImg'
                             />
                           </Link>
-                          <span className='rightbarFollowingName'>{following.username}</span>
+                          <span className='rightbarFollowingName'>{f.username}</span>
                         </div>
                         <div className='rightbarFollowingRight'>
                           <span className='rightbarFollowingAction'
                             onClick={async () => {
                               await axiosJWT.put(
-                                `http://localhost:8000/api/user/${following.username}/unfollow`,
+                                `http://localhost:8000/api/user/${f.username}/unfollow`,
                                 {},
                                 {
                                   headers:{ Authorization: "Bearer " + user.accessToken}
                                 }
                               );
-                              dispatch({type:"UNFOLLOW", payload:following._id})
+                              dispatch({type:"UNFOLLOW", payload:f._id})
                             }}
                           >
                             UNFOLLOW
@@ -129,12 +127,12 @@ const RightbarContainer = styled.div`
     display: flex;
   }
   .rightbarFollowingAction {
-    font-size: 18px;
+    font-size: 18px;  
     color: rgb(0, 149, 246);
     cursor: pointer;
   }
   .rightbarFollowingAction:hover {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
     color: rgb(0, 149, 246);
     cursor: pointer;

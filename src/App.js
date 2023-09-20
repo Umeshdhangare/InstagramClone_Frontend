@@ -6,6 +6,7 @@ import GlobalStyles from './components/GlobalStyles';
 import { useState, useContext, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
+import { NotificationContainer } from 'react-notifications';
 
 function App() {
   const {user} = useContext(AuthContext);
@@ -17,6 +18,7 @@ function App() {
   return (
         <>
           <GlobalStyles />
+          <NotificationContainer />
           <BrowserRouter>
             <Routes>
               <Route 

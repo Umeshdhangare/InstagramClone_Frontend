@@ -9,6 +9,6 @@ const GlobalStyles = createGlobalStyle
     Link {
         text-decoration: None;
     }
-    `
+    `;
 
 export default GlobalStyles;
