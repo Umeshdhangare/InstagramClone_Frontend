@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { FiMoreVertical } from "react-icons/fi";
 import { AuthContext } from "../contexts/AuthContext";
@@ -22,6 +22,10 @@ const Post = (props) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [countComments, setCountComments] = useState(post.comments?.length);
 	const axiosJWT = axios.create();
+
+	useEffect(() => {
+		setIsliked(post.likes.includes(user.data._id));
+	}, []);
 
 	const deleteHandler = async () => {
 		try {
@@ -56,35 +60,35 @@ const Post = (props) => {
 		setCountComments(countComments + 1);
 	};
 
-	console.log(`/profile/${post.user.username}`);
-
 	return (
 		<>
-			{showMenu && <Backdrop onClose={showMenuHandler} />}
-			<Modal
-				onClose={() => {
-					setShowPost(false);
-				}}
-			>
-				{showPost && <ShowPost post={post} newComment={commentHandler} />}
-			</Modal>
+			{showPost && (
+				<Modal
+					onClose={() => {
+						setShowPost(false);
+					}}
+				>
+					<ShowPost post={post} newComment={commentHandler}></ShowPost>
+				</Modal>
+			)}
 			<PostContainer>
 				<div className="postTop">
 					<div className="postTopLeft">
 						<span
 							onClick={() => {
-								navigate(`/profile/${post.user.username}`);
+								navigate(`/profile/${user.data.username}`);
 							}}
 						>
 							<img
 								src={post.user.profilePicture}
-								alt={user.username}
+								alt=""
 								className="postProfileImg"
 							/>
 						</span>
+
 						<Link
 							style={{ textDecoration: "none", color: "#000000" }}
-							to={`/profile/${post.user.username}`}
+							to={`profile/${post.user.username}`}
 						>
 							<span className="postUsername">{post.user.username}</span>
 						</Link>
@@ -170,6 +174,7 @@ const PostContainer = styled.div`
 	.postTopLeft {
 		display: flex;
 		align-items: center;
+		cursor: pointer;
 	}
 	.postProfileImg {
 		width: 32px;
