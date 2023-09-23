@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Post from "./Post";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { SpinnerDotted } from "spinners-react";
+import config from "../config";
 
 const Feed = (props) => {
 	const { user } = useContext(AuthContext);
@@ -11,7 +12,6 @@ const Feed = (props) => {
 	const [currPage, setCurrPage] = useState(1);
 	const [prevPage, setPrevPage] = useState(0);
 	const [posts, setPosts] = useState([]);
-	const listInnerRef = useRef();
 	const [wasLastList, setWasLastList] = useState(false);
 
 	const axiosJWT = axios.create();
@@ -25,10 +25,9 @@ const Feed = (props) => {
 		}
 		props.onChange(0);
 		const fetchPosts = async () => {
-			const res = await axiosJWT.get(
-				`http://localhost:8000/api/post/timeline`,
-				{ headers: { Authorization: "Bearer " + user.accessToken } }
-			);
+			const res = await axiosJWT.get(config.url + `post/timeline`, {
+				headers: { Authorization: "Bearer " + user.accessToken },
+			});
 
 			if (res.data.posts.length === 1) {
 				setWasLastList(true);
@@ -62,20 +61,10 @@ const Feed = (props) => {
 		props,
 	]);
 
-	const onScroll = () => {
-		if (listInnerRef.current) {
-			const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-
-			if (scrollTop + clientHeight === scrollHeight) {
-				setCurrPage(currPage + 1);
-			}
-		}
-	};
-
 	return (
 		<>
 			<FeedContainer>
-				<div onScroll={onScroll} ref={listInnerRef} className="FeedWrapper">
+				<div className="FeedWrapper">
 					{posts.map((p) => (
 						<Post
 							key={p._id}
@@ -99,7 +88,7 @@ const Feed = (props) => {
 };
 
 const FeedContainer = styled.div`
-	width: 500px;
+	width: 600px;
 	.FeedWrapper {
 		height: calc(100vh - 63px);
 		padding: 5px;

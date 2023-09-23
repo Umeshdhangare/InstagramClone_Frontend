@@ -1,83 +1,84 @@
-import React, {useState} from "react";
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import axios from "axios";
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import config from "../../config";
 
 const SignUp = () => {
-    const navigate = useNavigate();
-    const [email, setEmail] = useState();
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+	const navigate = useNavigate();
+	const [email, setEmail] = useState();
+	const [username, setUsername] = useState();
+	const [password, setPassword] = useState();
 
-    const registerHandler = async (e) => {
-        e.preventDefault();
-        const data = {email, username, password};
-        try {
-            await axios.post(`http://localhost:8000/api/user/signup`, data);
-            navigate("/login");
-        }
-        catch (e) {
-            console.log(e.message);
-        }
-    }
+	const registerHandler = async (e) => {
+		e.preventDefault();
+		const data = { email, username, password };
+		try {
+			await axios.post(config.url + `user/signup`, data);
+			navigate("/login");
+		} catch (e) {
+			console.log(e.message);
+		}
+	};
 
-    return(
-        <SignupContainer>
-            <div className="signupWrapper">
-                <div className="signupRight">
-                    <div className="signupRightTop">
-                        <div className="signupRightTopTop">
-                            <span className="signupRightTopLogo">Instagram</span>
-                        </div>
-                        <div className="signupRightTopForm">
-                            <form action="" className="signupBox" onSubmit={registerHandler}>
-                                <input 
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Email"
-                                    type="email"
-                                    required
-                                    className="signupInput" 
-                                />
-                                
-                                <input 
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    placeholder="Username"
-                                    type="text"
-                                    required
-                                    className="signupInput"
-                                />
-                                
-                                <input
-                                    onChange={(e)=> setPassword(e.target.value)} 
-                                    placeholder="Password"
-                                    type="password"
-                                    required
-                                    minLength="6"
-                                    className="signupInput" 
-                                />
-                                
-                                <button className="signupButton">Sign UP</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div className="signupRightBottom">
-                        <span>Already have an accounnt?</span>
-                        
-                        <Link to="/login" style={{textDecoration: "none"}}>
-                            <span
-                            className="signUpText"
-                            onClick={() => {
-                                navigate("/login")
-                            }}>
-                                Log In
-                            </span>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </SignupContainer>
-    )
-}
+	return (
+		<SignupContainer>
+			<div className="signupWrapper">
+				<div className="signupRight">
+					<div className="signupRightTop">
+						<div className="signupRightTopTop">
+							<span className="signupRightTopLogo">Instagram</span>
+						</div>
+						<div className="signupRightTopForm">
+							<form action="" className="signupBox" onSubmit={registerHandler}>
+								<input
+									onChange={(e) => setEmail(e.target.value)}
+									placeholder="Email"
+									type="email"
+									required
+									className="signupInput"
+								/>
+
+								<input
+									onChange={(e) => setUsername(e.target.value)}
+									placeholder="Username"
+									type="text"
+									required
+									className="signupInput"
+								/>
+
+								<input
+									onChange={(e) => setPassword(e.target.value)}
+									placeholder="Password"
+									type="password"
+									required
+									minLength="6"
+									className="signupInput"
+								/>
+
+								<button className="signupButton">Sign UP</button>
+							</form>
+						</div>
+					</div>
+					<div className="signupRightBottom">
+						<span>Already have an accounnt?</span>
+
+						<Link to="/login" style={{ textDecoration: "none" }}>
+							<span
+								className="signUpText"
+								onClick={() => {
+									navigate("/login");
+								}}
+							>
+								Log In
+							</span>
+						</Link>
+					</div>
+				</div>
+			</div>
+		</SignupContainer>
+	);
+};
 
 const SignupContainer = styled.div`
     width: 100vw;

@@ -11,7 +11,7 @@ function Home(props) {
 			<Topbar rerenderFeed={props.rerenderFeed} onChange={props.onChange} />
 			<HomeContainer>
 				<Feed rerenderFeed={props.rerenderFeed} onChange={props.onChange} />
-				{/* <Rightbar /> */}
+				<Rightbar />
 			</HomeContainer>
 		</>
 	);
