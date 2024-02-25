@@ -44,8 +44,8 @@ function Rightbar() {
 											alt=""
 											className="rightbarFollowingImg"
 										/>
+										<span className="rightbarFollowingName">{f.username}</span>
 									</Link>
-									<span className="rightbarFollowingName">{f.username}</span>
 								</div>
 								<div className="rightbarFollowingRight">
 									<span
@@ -115,11 +115,6 @@ const RightbarContainer = styled.div`
 	}
 	.rightbarFollowingImg {
 		padding-left: 5px;
-	}
-	.rightbarFollowingName {
-		padding-left: 10px;
-	}
-	.rightbarFollowingImg {
 		width: 60px;
 		height: 60px;
 		border-radius: 50%;
@@ -127,6 +122,7 @@ const RightbarContainer = styled.div`
 		cursor: pointer;
 	}
 	.rightbarFollowingName {
+		padding-left: 10px;
 		font-size: 15px;
 		font-weight: bold;
 	}
@@ -134,12 +130,12 @@ const RightbarContainer = styled.div`
 		display: flex;
 	}
 	.rightbarFollowingAction {
-		font-size: 18px;
+		font-size: 15px;
 		color: rgb(0, 149, 246);
 		cursor: pointer;
 	}
 	.rightbarFollowingAction:hover {
-		font-size: 15px;
+		font-size: 16px;
 		font-weight: 500;
 		color: rgb(0, 149, 246);
 		cursor: pointer;

@@ -21,6 +21,8 @@ function Profile(props) {
 	});
 	const axiosJWT = axios.create();
 
+	console.log(username);
+
 	const hideEditProfileHandler = () => {
 		setShowEditProfile(false);
 	};

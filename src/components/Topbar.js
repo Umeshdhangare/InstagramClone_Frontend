@@ -24,7 +24,7 @@ function Topbar(props) {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [showBarSearchMobile, setShowBarSearchMobile] = useState(false);
 
-	// console.log(user);
+	console.log(user.data);
 	const logoutHandler = async () => {
 		await axios.post(config.url + `user/logout`, {
 			refreshToken: user.refreshToken,

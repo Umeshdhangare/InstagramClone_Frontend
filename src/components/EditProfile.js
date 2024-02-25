@@ -169,6 +169,8 @@ const EditProfileContainer = styled.div`
 		cursor: pointer;
 		display: flex;
 		flex-direction: column;
+		width: 150px;
+		height: 150px;
 	}
 `;
 
